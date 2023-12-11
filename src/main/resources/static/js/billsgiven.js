@@ -133,7 +133,6 @@
 
 
                             console.error('Error:', error);
-                            //                                 Handle errors (e.g., show user-friendly message)
                         }
 
                     }
@@ -148,12 +147,12 @@
                     setTimeout(() => {
                         let container = document.getElementById("messageContainer");
                         container.style.display = "none";
-                    }, 5000); // 5000 milliseconds = 5 seconds
+                    }, 5000);
 
 
 
                     console.error('Error:', error);
-                    //                                 Handle errors (e.g., show user-friendly message)
+
                 });
 
 
@@ -195,9 +194,9 @@
                         setTimeout(() => {
                             let container = document.getElementById("messageContainer");
                             container.style.display = "none";
-                        }, 5000); // 5000 milliseconds = 5 seconds
+                        }, 5000);
                         console.error('Error:', error);
-                        //                                 Handle errors (e.g., show user-friendly message)
+                        //
                     }
 
                 }
@@ -213,9 +212,9 @@
                 setTimeout(() => {
                     let container = document.getElementById("messageContainer");
                     container.style.display = "none";
-                }, 5000); // 5000 milliseconds = 5 seconds
+                }, 5000);
                 console.error('Error:', error);
-                //                                 Handle errors (e.g., show user-friendly message)
+                //
                 console.error('There was an error deleting the case:', error);
             });
 
