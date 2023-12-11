@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ScheduleX</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+
+    <link rel="shortcut icon" th:href="@{/images/schedulex.png}"
+          type="image/png">
+
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@600&display=swap" rel="stylesheet">
+</head>
+<body class="vh-100">
+
+<nav class="navbar navbar-custombg border fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/schedulex.png}" class="img-fluid" alt="SchduleX"
+                 style="max-height: 50px; height: auto; width: auto;"
+            >
+        </a>
+        <button class="navbar-toggler border" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <a class="navbar-brand" href="#">
+                    <img th:src="@{/images/schedulex.png}" class="img-fluid" alt="SchduleX"
+                         style="max-height: 50px; height: auto; width: auto;"
+                    >
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/schedulex/home}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/schedulex/login}">Login/Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/schedulex/casesreceived}">Cases Received</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/schedulex/casescompleted}">Cases Completed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/schedulex/billssubmitted}">Bills submitted</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/schedulex/paymentreceived}">Payment Received</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/schedulex/allcases}">All Cases</a>
+                    </li>
+                </ul>
+                <!--                <form class="d-flex mt-3" role="search">-->
+                <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+                <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+                <!--                </form>-->
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container custom-padding">
+    <div class="row" style="justify-content: center;">
+        <div class="col-12">
+            <div sec:authorize="!isAuthenticated()" class="alert alert-light" role="alert">
+                Create an account or sign in to see the cases u have received
+            </div>
+            <div sec:authorize="isAuthenticated()" class="row" style="justify-content: center;">
+                <div class="col-12">
+                    <div class="col-12" style="display: none"
+                         id="messageContainer">
+                        <div class="" role="alert" id="messageHolder">
+                            <p id="message">
+                            </p>
+                        </div>
+                    </div>
+                    <div th:if="${#lists.isEmpty(cases)}" class="alert alert-info" role="alert">
+                        <div class="row" style="justify-content: center;">
+                            <div class="col-12">
+                                <p>No cases have been added yet</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-3">
+                            <label for="validationCustom01" class="form-label">Case Name</label>
+                            <input type="text" class="form-control" id="validationCustom01" required>
+                            <div class="invalid-feedback">
+                                Please enter a case-name.
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationCustom02" class="form-label">Fees Agreed</label>
+                            <input type="text" class="form-control" id="validationCustom02" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid fee amount containing only numbers
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationCustom03" class="form-label">Case Number</label>
+                            <input type="text" class="form-control" id="validationCustom03" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid case number
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationCustom04" class="form-label">Court type</label>
+                            <select class="form-select" id="validationCustom04" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="High Court">High Court</option>
+                                <option value="Supreme Court">Supreme Court</option>
+                                <option value="District Court">District Court</option>
+                                <option value="DRT">DRT</option>
+                                <option value="NCLT">NCLT</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid Court
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-success" type="button" id="submitButton" onclick="checkAndSubmit();">
+                                Submit Information
+                            </button>
+                        </div>
+                    </form>
+
+                    <div th:unless="${#lists.isEmpty(cases)}">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Case Name</th>
+                                <th scope="col">Case ID</th>
+                                <th scope="col">Court Type</th>
+                                <th scope="col">Fees Agreed</th>
+                                <th scope="col" class="d-none d-md-table-cell">Entry Date</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="case : ${cases}">
+                                <tr>
+                                    <div class="row" style="justify-content: center;">
+                                        <div class="col-2">
+                                            <td th:text="${case.name}">
+                                            </td>
+                                        </div>
+                                        <div class="col-2">
+                                            <td th:text="${case.caseInfo.caseIdentityNumber}">
+                                            </td>
+                                        </div>
+                                        <div class="col-2">
+                                            <td th:text="${case.caseInfo.courtType}">
+                                            </td>
+                                        </div>
+                                        <div class="col-2">
+                                            <td th:text="${case.feesAgreed}">
+                                            </td>
+                                        </div>
+                                        <div class="col-2">
+                                            <td class="d-none d-md-table-cell" th:text="${case.dateOfEntry}">
+                                            </td>
+                                        </div>
+                                        <div class="col-2">
+                                            <td>
+                                                <img th:src="@{/images/delete.svg}" class="img-fluid" alt="delete"
+                                                     th:data-id="${case.id}" onclick="deleteReceivedCase(this);"
+                                                     style="max-height: 30px; height: auto; width: auto;"
+                                                >
+                                            </td>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<script th:src="@{/js/casesreceived.js}"></script>
+</body>
+</html>

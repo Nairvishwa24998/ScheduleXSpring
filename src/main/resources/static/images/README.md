@@ -1,0 +1,17 @@
+# SCHEDULEX
+#### Video Demo: https://youtu.be/_jnTgDIZW84
+#### Description:
+##### This application is intended to make the process of recording, viewing and updationg of case information in Law Offices easier. I study at a Law School and the inspiration for this project is directly based on my own experiences during internships. Often, as the number of cases go high, it becomes hard to track certain financial aspects of it- especially the billing part. Focus on crucial cases can lead to failure in tracking relatively smaller cases in this department. Often an exorbitant delay in this could result in no payment received.  
+##### As the number of cases starts to increase, offices often find it difficult to keep track of which cases they have been paid for, which ones they have given for billing etc.
+##### By allowing users to create accounts and update/edit/add information of their own, users with the same credentials can easily see the information being updated and make appropriate changes. The website would automatically store the time and date at which the entry and display it.
+##### Further, additional insights can also be derived from this the options for which would be added later on. I hope to add more to them in the future.
+##### Additionally, you can have the records instantly mailed to you by clicking on the corresponding option.
+##### Initially, I wasn't planning to have a user registration system. However, the idea of allowing multiple people to access relevant information at the same time seemed powerful. 
+##### I have used real mail to validate emails, to ensure invalid email ids have not been entered into. 
+##### Bootstrap has been used to add to the aesthetic of the website. 
+##### I have used the datetime module to record the date and time
+##### The additional insights collumn as one could gather from the name, would help to allow for better understanding of the information. For instance, when the number of submitted cases has gone high it may not be easy to go through multiple tables and figure out which one does not appear in each. This column provides options to directly present these to you. 
+##### Alternatively, you could click on the mail option under additional insights and have the above mailed to you.  
+##### An option to delete entries has been provided in the three tables- Cases Received, Bills Given and Payment Received. The scroll down list which appears would automatically consist of options you could choose from. Then simply click on delete. 
+##### The delete option has intentionally not been given in the additional insights collumn. This is because the information being displayed here is based on the entries in the three main tables and and editing it here might lead to discrepancies and confusions if the user does not make a corresponding change to the main tables. 
+##### The application can be accessed from computers as well as mobile devices. The best way to utilize this would be to register for an account and share the credentials amongst all the office members in charge of administerial tasks as well as the advocate. This way the advocate can directly keep track of the changes being made and take decisions accordingly.
