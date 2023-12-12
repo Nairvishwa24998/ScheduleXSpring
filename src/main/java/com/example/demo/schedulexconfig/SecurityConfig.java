@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/schedulex/login")
-                        .defaultSuccessUrl("/schedulex/home")
+                        .defaultSuccessUrl("/schedulex/home", true)
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .permitAll())
